@@ -1,6 +1,6 @@
-from crypto.util.str import frequency_count, alternating_string_split, frequency_distribution
+from crypto.cyphers.vigenere import vigenere_decrypt
 
-string = "evtdwdlgszfepllxdwpktevlgscjgszfevsjecdpsszkpyqcjdetcylboosncmaewzykzcypgsyhvpycyprzpgyzhsljpevpvsj"
+string = 'evtdwdlgszfepllxdwpktevlgscjgszfevsjecdpsszkpyqcjdetcylboosncmaewzykzcypgsyhvpycyprzpgyzhsljpevpvsj'
+key = 'lol'  # Credit: https://www.guballa.de/vigenere-solver
 
-print frequency_distribution(string)
-print alternating_string_split(string, 4)
+print vigenere_decrypt(string, key)

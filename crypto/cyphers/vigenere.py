@@ -7,7 +7,7 @@ def vigenere_encrypt(string, key):
 
     for char in string:
         result += addChar(char, key[i])
-        i = i + 1 % len(key)
+        i = (i + 1) % len(key)
 
     return result
 
@@ -18,6 +18,6 @@ def vigenere_decrypt(string, key):
 
     for char in string:
         result += subChar(char, key[i])
-        i = i + 1 % len(key)
+        i = (i + 1) % len(key)
 
     return result
