@@ -1,0 +1,6 @@
+from crypto.util.str import frequency_count, alternating_string_split, frequency_distribution
+
+string = "evtdwdlgszfepllxdwpktevlgscjgszfevsjecdpsszkpyqcjdetcylboosncmaewzykzcypgsyhvpycyprzpgyzhsljpevpvsj"
+
+print frequency_distribution(string)
+print alternating_string_split(string, 4)
