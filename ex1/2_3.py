@@ -8,4 +8,5 @@ for j in range(0, 20):
     a1 = a2
     a2 = t
 
-## Stop using ints, switch to reals.
+# Stop using ints, switch to reals.
+# F_2 / (a^2 + a + 1) gives root
