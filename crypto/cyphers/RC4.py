@@ -4,14 +4,14 @@ class RC4:
     j = 0
 
     def __init__(self, k):
-        l = len(k)
+        length = len(k)
 
         for i in range(0, 256):
             self.S.append(i)
 
         j = 0
         for i in range(0, 256):
-            j = (j + self.S[i] + k[i % l]) % 256
+            j = (j + self.S[i] + k[i % length]) % 256
             self.swap(i, j)
 
     def swap(self, i, j):
@@ -25,3 +25,10 @@ class RC4:
         self.swap(self.i, self.j)
         return self.S[(self.S[self.i] + self.S[self.j]) % 256]
 
+    def generate_multiple(self, amount):
+        result = []
+
+        for _ in range(amount):
+            result.append(self.generate())
+
+        return result
