@@ -6,11 +6,11 @@ class RC4:
     def __init__(self, k):
         length = len(k)
 
-        for i in range(0, 256):
+        for i in range(256):
             self.S.append(i)
 
         j = 0
-        for i in range(0, 256):
+        for i in range(256):
             j = (j + self.S[i] + k[i % length]) % 256
             self.swap(i, j)
 
