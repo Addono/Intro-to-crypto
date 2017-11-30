@@ -32,3 +32,6 @@ class RC4:
             result.append(self.generate())
 
         return result
+
+    def get_s_index(self, index):
+        return self.S[index]
