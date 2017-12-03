@@ -4,18 +4,15 @@ from crypto.key.generate import generate_key
 
 s2_0 = []
 s2_not_0 = []
-for _ in range(100000):
+for _ in range(1000000):
     key = generate_key(16, 8)
     rc4 = RC4(key)
     s2_is_0 = rc4.get_s_index(2) == 0
 
-    output = rc4.generate_multiple(2)
-    result = output[1]
-
     if s2_is_0:
-        s2_0.append(result)
+        s2_0.append(rc4.generate(2))
     else:
-        s2_not_0.append(result)
+        s2_not_0.append(rc4.generate(2))
 
 frequency.text(s2_0)
 frequency.text(s2_not_0)

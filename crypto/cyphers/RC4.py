@@ -6,23 +6,24 @@ class RC4:
     def __init__(self, k):
         length = len(k)
 
-        for i in range(256):
-            self.S.append(i)
+        for m in range(256):
+            self.S.append(m)
 
-        j = 0
-        for i in range(256):
-            j = (j + self.S[i] + k[i % length]) % 256
-            self.swap(i, j)
+        n = 0
+        for m in range(256):
+            n = (n + self.S[m] + k[m % length]) % 256
+            self.swap(m, n)
 
-    def swap(self, i, j):
-        si = self.S[i]
-        self.S[i] = self.S[j]
-        self.S[j] = si
+    def swap(self, m, n):
+        sn = self.S[m]
+        self.S[m] = self.S[n]
+        self.S[n] = sn
 
-    def generate(self):
-        self.i = (self.i + 1) % 256
-        self.j = (self.j + self.S[self.i]) % 256
-        self.swap(self.i, self.j)
+    def generate(self, amount=1):
+        for _ in range(amount):
+            self.i = (self.i + 1) % 256
+            self.j = (self.j + self.S[self.i]) % 256
+            self.swap(self.i, self.j)
         return self.S[(self.S[self.i] + self.S[self.j]) % 256]
 
     def generate_multiple(self, amount):
