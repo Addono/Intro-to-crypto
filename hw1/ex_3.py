@@ -1,4 +1,3 @@
-# import pyximport; pyximport.install()
 import concurrent.futures
 
 from tqdm import tqdm
@@ -10,6 +9,7 @@ expected_output = [130, 189, 254, 192, 238, 132, 216, 132, 82, 173]
 # expected_output = [69, 235, 200, 151, 162, 18, 113, 193, 34, 80] # Generated with key [80, 10, 10, 10, 10]
 
 __S = [i for i in range(256)]
+
 
 def increment_key(key: list, l: int = 0, max: int = 256) -> list:
     i = len(key)
@@ -54,13 +54,22 @@ def rc4_check_key(key: list):
     return True
 
 
-def crack_key(start_key: list) -> list:
+def crack_key(key: list) -> list:
     while True:
-        if rc4_check_key(start_key):
-            return start_key
+        if rc4_check_key(key):
+            return key
 
-        start_key = increment_key(start_key, split)
-        if start_key is None:
+        # Increment key
+        i = total_key_length
+        while i > split:
+            i -= 1
+            key[i] += 1
+
+            if key[i] >= 256:
+                key[i] = 0
+            else:
+                break
+        else:
             return None
 
 
@@ -83,7 +92,7 @@ def main():
             start_base_key = increment_key(start_base_key, given_key_length)
 
     results = []
-    with concurrent.futures.ProcessPoolExecutor(4) as executor:
+    with concurrent.futures.ProcessPoolExecutor() as executor:
         for res in tqdm(executor.map(crack_key, keys), total=len(keys), desc="Processed sub-keys"):
             if res is not None:
                 print("\n" + str(res))
@@ -94,3 +103,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
