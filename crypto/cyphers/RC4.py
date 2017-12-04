@@ -1,32 +1,35 @@
 class RC4:
-    S = []
-    i = 0
-    j = 0
-
     def __init__(self, k):
+        self.__S = []
+        self.__i = 0
+        self.__j = 0
+
+        if type(k) is str:
+            k = [ord(char) for char in k]
+
         length = len(k)
 
         for m in range(256):
-            self.S.append(m)
+            self.__S.append(m)
 
         n = 0
         for m in range(256):
-            n = (n + self.S[m] + k[m % length]) % 256
+            n = (n + self.__S[m] + k[m % length]) % 256
             self.swap(m, n)
 
     def swap(self, m, n):
-        sn = self.S[m]
-        self.S[m] = self.S[n]
-        self.S[n] = sn
+        sn = self.__S[m]
+        self.__S[m] = self.__S[n]
+        self.__S[n] = sn
 
-    def generate(self, amount=1):
+    def generate(self, amount: int=1):
         for _ in range(amount):
-            self.i = (self.i + 1) % 256
-            self.j = (self.j + self.S[self.i]) % 256
-            self.swap(self.i, self.j)
-        return self.S[(self.S[self.i] + self.S[self.j]) % 256]
+            self.__i = (self.__i + 1) % 256
+            self.__j = (self.__j + self.__S[self.__i]) % 256
+            self.swap(self.__i, self.__j)
+        return self.__S[(self.__S[self.__i] + self.__S[self.__j]) % 256]
 
-    def generate_multiple(self, amount):
+    def generate_multiple(self, amount: int=1):
         result = []
 
         for _ in range(amount):
@@ -34,5 +37,5 @@ class RC4:
 
         return result
 
-    def get_s_index(self, index):
-        return self.S[index]
+    def get_s_index(self, index: int):
+        return self.__S[index]
