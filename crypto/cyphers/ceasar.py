@@ -15,4 +15,4 @@ def ceasar_decrypt(string, key):
 
 def ceasar_decrypt_all(string):
     for c in range(0, 26):
-        print str(c) + ": " + ceasar_decrypt(string, c)
+        print(str(c) + ": " + ceasar_decrypt(string, c))
