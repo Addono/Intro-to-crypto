@@ -39,3 +39,16 @@ class RC4:
 
     def get_s_index(self, index: int):
         return self.__S[index]
+
+    def check_output(self, output: list):
+        i = 0
+        j = 0
+        for expected in output:
+            i = (i + 1) % 256
+            j = (j + self.__S[i]) % 256
+            self.swap(i, j)
+
+            if self.__S[(self.__S[i] + self.__S[j]) % 256] != expected:
+                return False
+
+        return True
