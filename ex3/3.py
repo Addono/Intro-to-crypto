@@ -14,5 +14,5 @@ for _ in range(1000000):
 print(base_key)
 frequency.text(result)
 
+# Notice the peak at 42
 histogram.plot(result, 256)
-
