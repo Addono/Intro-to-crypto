@@ -7,15 +7,20 @@ class TestRC4(TestCase):
     test = {
         "Key" : ["EB", "9F", "77", "81", "B7", "34", "CA", "72", "A7", "19"],
         "Wiki": ["60", "44", "DB", "6D", "41", "B7"],
-        "Secret": ["04", "D4", "6B", "05", "3C", "A8", "7B", "59"]
+        "Secret": ["04", "D4", "6B", "05", "3C", "A8", "7B", "59"],
+        "Passw" : ["D9", "05", "46", "66", "AB"]
     }
 
+    def convert_key(self, key: list):
+        return [ord(char) for char in key]
 
     # def test_swap(self):
     #     self.fail()
     #
     def test_generate(self):
         for key, output in self.test.items():
+            key = self.convert_key(key)
+
             rc4 = RC4(key)
             for c in output:
                 result = rc4.generate()
@@ -23,6 +28,8 @@ class TestRC4(TestCase):
 
     def test_generate_multiple(self):
         for key, output in self.test.items():
+            key = self.convert_key(key)
+
             rc4_1 = RC4(key)
             rc4_2 = RC4(key)
 
