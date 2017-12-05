@@ -8,11 +8,15 @@ class TestRC4(TestCase):
         "Key" : ["EB", "9F", "77", "81", "B7", "34", "CA", "72", "A7", "19"],
         "Wiki": ["60", "44", "DB", "6D", "41", "B7"],
         "Secret": ["04", "D4", "6B", "05", "3C", "A8", "7B", "59"],
-        "Passw" : ["D9", "05", "46", "66", "AB"]
+        "Passw" : ["D9", "05", "46", "66", "AB"],
+        "P\x17*{ê": ['82', 'BD', 'FE', 'C0', 'EE', '84', 'D8', '84', '52', 'AD'] # HW1 exercise 3 key
     }
 
     def convert_key(self, key: list):
-        return [ord(char) for char in key]
+        if type(key[0]) is str:
+            return [ord(char) for char in key]
+        else:
+            return key
 
     # def test_swap(self):
     #     self.fail()
