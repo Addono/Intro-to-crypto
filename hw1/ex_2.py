@@ -1,4 +1,8 @@
-class RC4:
+from tqdm import trange
+from crypto.key.generate import generate_key
+
+
+class RC4_broken:
     def __init__(self, k: list):
         self.__k = k
         self.__S = []
@@ -44,19 +48,18 @@ class RC4:
     def get_s_index(self, index: int):
         return self.__S[index]
 
-    def check_output(self, output: list):
-        i = 0
-        j = 0
-        S = self.__S
-        for expected in output:
-            i = (i + 1) % 256
-            j = (j + S[i]) % 256
 
-            sj = S[i]
-            S[i] = S[j]
-            S[j] = sj
+result = []
+iterations = 1000000
+for _ in trange(iterations):
+    key = generate_key(16, 8)
+    rc4 = RC4_broken(key)
 
-            if S[(S[i] + S[j]) % 256] != expected:
-                return False
+    counter = 0
+    while rc4.generate() is not None:
+        counter += 1
 
-        return True
+    result.append(counter)
+
+print(result)
+print(sum(result)/iterations)
