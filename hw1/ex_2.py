@@ -55,7 +55,7 @@ for _ in trange(iterations):
     key = generate_key(16, 8)
     rc4 = RC4_broken(key)
 
-    counter = 0
+    counter = 1
     while rc4.generate() is not None:
         counter += 1
 
