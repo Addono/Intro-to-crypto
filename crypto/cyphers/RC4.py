@@ -1,6 +1,5 @@
 class RC4:
     def __init__(self, k: list):
-        self.__k = k
         self.__S = []
         self.__i = 0
         self.__j = 0
@@ -16,18 +15,15 @@ class RC4:
             self.swap(m, n)
 
     def swap(self, m: int, n: int):
-        self.__S[n] = self.__S[n] ^ self.__S[m]
-        self.__S[m] = self.__S[n] ^ self.__S[m]
-        self.__S[n] = self.__S[n] ^ self.__S[m]
+        sn = self.__S[m]
+        self.__S[m] = self.__S[n]
+        self.__S[n] = sn
 
     def generate(self, amount: int=1):
         for _ in range(amount):
             self.__i = (self.__i + 1) % 256
             self.__j = (self.__j + self.__S[self.__i]) % 256
             self.swap(self.__i, self.__j)
-
-            if self.__i == self.__j:
-                return None
         return self.__S[(self.__S[self.__i] + self.__S[self.__j]) % 256]
 
     def generate_multiple(self, amount: int=1):
