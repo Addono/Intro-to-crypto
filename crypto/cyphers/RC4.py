@@ -16,9 +16,6 @@ class RC4:
             self.swap(m, n)
 
     def swap(self, m: int, n: int):
-        # sn = self.__S[m]
-        # self.__S[m] = self.__S[n]
-        # self.__S[n] = sn
         self.__S[n] = self.__S[n] ^ self.__S[m]
         self.__S[m] = self.__S[n] ^ self.__S[m]
         self.__S[n] = self.__S[n] ^ self.__S[m]
