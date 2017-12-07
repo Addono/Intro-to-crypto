@@ -13,14 +13,17 @@ class LFSR:
 
         return state[1:] + [count % 2]
 
-    def sequence_length(self, init_state: list):
+    def sequence(self, init_state: list):
         state = init_state
-        count = 0
+        res = []
         while True:
-            count += 1
+            res.append(state)
             state = self.generate(state)
             if state == init_state:
-                return count
+                return res
+
+    def sequence_length(self, init_state: list):
+        return len(self.sequence(init_state))
 
     def generate_sequences(self, length: int, base: list = []):
         if length == 0:
